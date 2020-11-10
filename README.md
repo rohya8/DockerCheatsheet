@@ -18,8 +18,11 @@ docker ps -a ( stopped containers(	))
 
 ---Docker copy to and from container ---
 docker cp <container>:/usr/src/app/config.json .
+  
 docker cp config.json <container>:/usr/src/app/config.json
+  
 docker exec -ti <container> /bin/ash
+  
 
 --- Docker Save and Load commands---
 docker save project_name > project_name.tar
@@ -29,19 +32,24 @@ docker load --input project_name.tar
 --- Docker build ---
 docker build -t project_name .
 
----Docker Run with no container---
+--- Docker Run with no container ---
 
 docker network create my-network
+
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
+
 docker run -it --net=my-network --name project_name  --rm -p 3113:3113 -d project_name
 
----Docker Run---
+
+--- Docker Run ---
 
 docker network create my-network
+
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
+
 docker run --net=my-network --name project_name -p 3113:3113 -p 80:80 -d project_name
 
-#important commands
+# important commands
 
 kubectl exec -it <mongodbcontainer> -- /bin/bash
 mongo
