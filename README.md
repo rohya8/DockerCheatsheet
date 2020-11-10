@@ -30,16 +30,19 @@ docker load --input project_name.tar
 docker build -t project_name .
 
 ---Docker Run with no container---
+
 docker network create my-network
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
 docker run -it --net=my-network --name project_name  --rm -p 3113:3113 -d project_name
 
 ---Docker Run---
+
 docker network create my-network
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
 docker run --net=my-network --name project_name -p 3113:3113 -p 80:80 -d project_name
 
 #important commands
+
 kubectl exec -it <mongodbcontainer> -- /bin/bash
 mongo
 show databases
