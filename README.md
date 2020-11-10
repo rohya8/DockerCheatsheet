@@ -22,58 +22,22 @@ docker cp config.json <container>:/usr/src/app/config.json
 docker exec -ti <container> /bin/ash
 
 --- Docker Save and Load commands---
-docker save boxoffice-boxofficeui > boxoffice-boxofficeui.tar
-docker save boxoffice-boxofficecore > boxoffice-boxofficecore.tar
-docker save exela/ingester > ingester.tar
-docker save exela/exela-auth > exela-auth.tar
+docker save project_name > project_name.tar
 
-
-docker load --input boxoffice-boxofficeui.tar
-docker load --input ingester.tar
-docker load --input exela-auth.tar
+docker load --input project_name.tar
 
 --- Docker build ---
-docker build -t boxoffice/boxofficeui .
-docker build -t boxoffice/boxofficecore .
-docker build -t exela/ingester .
-docker build -t exela/exela-auth .
+docker build -t project_name .
 
 ---Docker Run with no container---
 docker network create my-network
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run -it --net=my-network --name boxoffice-boxofficeui  --rm -p 3113:3113 -d boxoffice/boxofficeui
-
-docker network create my-network
-docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run -it --net=my-network --name boxoffice-boxofficecore  --rm -p 3112:3112 -d boxoffice/boxofficecore
-
-docker network create my-network
-docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run -it --net=my-network --name ingester  --rm -p 3001:3001 -d exela/ingester	
-
-docker network create my-network
-docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run -it --net=my-network --name exela-auth  --rm -p 3001:3001 -d exela/exela-auth	
-
-
+docker run -it --net=my-network --name project_name  --rm -p 3113:3113 -d project_name
 
 ---Docker Run---
 docker network create my-network
 docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run --net=my-network --name boxoffice-boxofficeui -p 3113:3113 -p 80:80 -d boxoffice/boxofficeui
-
-docker network create my-network
-docker run --net=my-network --name localhost -p 27017:27017 -d mongo
-docker run --net=my-network --name boxoffice-boxofficecore -p 3112:3112 -d --env-file env-local.properties boxoffice/boxofficecore
-
-docker network create my-network
-docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run --net=my-network --name ingester -p 3001:3001 -d  --env-file env-local.properties exela/ingester	
-
-docker network create my-network
-docker run --net=my-network --name mymongo -p 27017:27017 -d mongo
-docker run --net=my-network --name exela-auth -p 3110:3110 -d --env-file env-local.properties exela/exela-auth	
-
+docker run --net=my-network --name project_name -p 3113:3113 -p 80:80 -d project_name
 
 #important commands
 kubectl exec -it <mongodbcontainer> -- /bin/bash
