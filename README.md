@@ -51,9 +51,9 @@ docker run --net=my-network --name project_name -p 3113:3113 -p 80:80 -d project
 
 # important commands
 
-kubectl exec -it <mongodbcontainer> -- /bin/bash
-mongo
-show databases
-use <dbname>
-db.dropDatabase()
-db.<collectionname>.drop()
+kubectl exec -it <mongodbcontainer> -- /bin/bash \
+mongo \
+show databases \
+use <dbname> \
+db.dropDatabase() \
+db.<collectionname>.drop() \
